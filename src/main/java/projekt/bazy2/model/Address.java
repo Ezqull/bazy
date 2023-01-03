@@ -1,7 +1,18 @@
 package projekt.bazy2.model;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
+import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Entity
+@Table(name = "address")
 public class Address extends BaseEntity{
 
     @Column(name = "street",
@@ -28,4 +39,12 @@ public class Address extends BaseEntity{
             nullable = false,
             length = 20)
     private String country;
+
+    @OneToMany(mappedBy = "oldAddress",
+            cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    private List<CheckedIn> oldCheckIns = new ArrayList<>();
+
+    @OneToMany(mappedBy = "newAddress",
+            cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    private List<CheckedIn> newCheckIns = new ArrayList<>();
 }

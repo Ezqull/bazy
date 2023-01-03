@@ -12,8 +12,8 @@ public abstract class BaseEntity {
     @Column(updatable = false,
             nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY,
-            generator = "native")
+                    generator = "native")
     @GenericGenerator(name = "native",
-            strategy = "native")
+                      strategy = "native")
     private Long id;
 }

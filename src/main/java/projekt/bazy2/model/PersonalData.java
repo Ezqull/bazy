@@ -1,11 +1,11 @@
 package projekt.bazy2.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "users")
+@Table(name = "personal_data")
 public class PersonalData extends BaseEntity{
 
     @Column(name = "name",
@@ -49,4 +49,8 @@ public class PersonalData extends BaseEntity{
             nullable = false,
             length = 20)
     private String mothersName;
+
+    @OneToMany(mappedBy = "personalData",
+            cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    private List<CheckedIn> checkIns = new ArrayList<>();
 }

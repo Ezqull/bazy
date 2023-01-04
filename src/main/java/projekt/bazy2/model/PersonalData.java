@@ -53,4 +53,7 @@ public class PersonalData extends BaseEntity{
     @OneToMany(mappedBy = "personalData",
             cascade = {CascadeType.MERGE, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     private List<CheckedIn> checkIns = new ArrayList<>();
+
+    @OneToOne(mappedBy = "personalData")
+    private ElectoralRegister electoralRegister;
 }

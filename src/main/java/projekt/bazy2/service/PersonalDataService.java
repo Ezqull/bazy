@@ -1,10 +1,10 @@
 package projekt.bazy2.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import projekt.bazy2.model.PersonalData;
-import projekt.bazy2.repos.PersonalDataRepository;
+import projekt.bazy2.repository.PersonalDataRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +16,7 @@ public class PersonalDataService {
     private final PersonalDataRepository personalDataRepository;
 
     @Autowired
-    public PersonalDataService(PersonalDataRepository personalDataRepository) {
+    public PersonalDataService(@Qualifier("personalDataRepository") PersonalDataRepository personalDataRepository) {
         this.personalDataRepository = personalDataRepository;
     }
 
@@ -31,12 +31,12 @@ public class PersonalDataService {
 
     public PersonalData getDataByPersonalid(String personalId){
         return personalDataRepository.findByPersonalId(personalId)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format(DATA_NOT_FOUND)));
+                .orElseThrow();
     }
 
-    public PersonalData getDataByPassportid(String passportId){
-        return personalDataRepository.findByPersonalId(passportId)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format(DATA_NOT_FOUND)));
+    public PersonalData getDataByPassportId(String passportId){
+        return personalDataRepository.findByPassportId(passportId)
+                .orElseThrow();
     }
 
     public PersonalData saveData(PersonalData personalData){

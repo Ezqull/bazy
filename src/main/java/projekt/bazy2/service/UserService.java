@@ -2,10 +2,9 @@ package projekt.bazy2.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import projekt.bazy2.model.User;
-import projekt.bazy2.repos.UserRepository;
+import projekt.bazy2.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +31,7 @@ public class UserService {
 
     public User getUserByEmail(String email){
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND)));
+                .orElseThrow();
     }
 
     public User saveUser(User user){

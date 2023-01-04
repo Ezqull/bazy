@@ -9,5 +9,4 @@ class Bazy2ApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
